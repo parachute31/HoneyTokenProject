@@ -1,0 +1,177 @@
+
+<!-- Updated Honeypot Admin Panel and Real Admin Dashboard Setup -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honeypot Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        main {
+            max-width: 800px;
+            margin: 70px auto 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .button-container button {
+            width: 150px;
+            height: 60px;
+            border: none;
+            color: #fff;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        #greenButton {
+            background-color: #28a745;
+        }
+        #greenButton:hover {
+            background-color: #218838;
+        }
+        #blueButton {
+            background-color: #007bff;
+        }
+        #blueButton:hover {
+            background-color: #0056b3;
+        }
+        .bot-check {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .download-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .download-section ul li {
+            margin: 10px 0;
+        }
+        .download-section ul li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .download-section ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <button id="signoutButton">Sign Out</button>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Dashboard Section -->
+    <main>
+        <h1>Honeypot Admin Panel</h1>
+        <p>This is a fake admin panel created to detect risky behavior. If an Admin interacts with these honey tokens, it serves as an early warning for potential security threats.</p>
+
+        <div class="button-container">
+            <p>Do not click any buttons below:</p>
+            <button id="greenButton" onclick="buttonClicked('green')">Click me (Green)</button>
+            <button id="blueButton" onclick="buttonClicked('blue')">Click me (Blue)</button>
+        </div>
+
+        <!-- Name input field -->
+        <div class="bot-check">
+            <label for="botName">If you are a Bot, type your name here. Leave blank if human:</label>
+            <input type="text" id="botName" name="botName">
+            <button onclick="submitName()">Submit</button>
+        </div>
+
+        <!-- Downloadable files -->
+        <div class="download-section">
+            <h2>Confidential Files</h2>
+            <ul>
+                <li><a href="files/financial_records.txt" download onclick="fileDownloaded('financial_records.txt')">financial_records.txt</a></li>
+                <li><a href="files/notes.txt" download>notes.txt</a></li>
+                <li><a href="files/data.txt" download>data.txt</a></li>
+                <li><a href="files/report.txt" download>report.txt</a></li>
+                <li><a href="files/readme.txt" download>readme.txt</a></li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- JavaScript for handling button clicks and recording data -->
+    <script>
+        let buttonClickedOnce = false;
+
+        function buttonClicked(color) {
+            if (buttonClickedOnce) {
+                alert('You can only click one button!');
+                return;
+            }
+            buttonClickedOnce = true;
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "log_button_click.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("button_color=" + color);
+        }
+
+        function submitName() {
+            const name = document.getElementById("botName").value;
+            if (name) {
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "log_name.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("bot_name=" + name);
+            }
+        }
+
+        function fileDownloaded(filename) {
+            if (filename === 'financial_records.txt') {
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "log_download.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("filename=" + filename);
+            }
+        }
+    </script>
+
+    <script src="../js/signout.js"></script>
+</body>
+</html>

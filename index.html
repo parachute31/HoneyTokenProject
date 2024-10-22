@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Honey Token Example Website by Neil B.">
+    <meta name="author" content="Neil B.">
+    <title>Honey Token Example Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .hero {
+            width: 100%;
+            height: 80vh;
+            background: url('media/dark_blue_geometric_background.jpeg') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-top: 75px;
+        }
+        .hero-text {
+            color: white;
+            font-size: 2.5em;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .content {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="/html/userlogs.html">User Logs</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="hero-text">
+            Welcome to the Honey Token Example Website
+        </div>
+    </div>
+
+    <div class="content">
+        <h2>Detect and Track Unauthorized Access</h2>
+        <p>This website demonstrates honey tokens or fake assets like files or credentials used to detect risky behavior. 
+            If an Admin interacts with these honey tokens, it serves as an early warning for potential security threats.</p>
+        <h3>Key Features:</h3>
+        <ul>
+            <li>Fake Admin Page: A honeypot to observe and analyze unauthorized or risky interactions.</li>
+            <li>Access Logs: Real-time tracking of suspicious Admin activity.</li>
+            <li>Honey Token Downloads: Alerts triggered when fake files are accessed, helping assess potential threats.</li>
+        </ul>
+    </div>
+
+</body>
+</html>
